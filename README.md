@@ -28,6 +28,9 @@ https://github.com/JaredP94/TravisCI-Test
 Simple Travis example for C++14 using modern GCC and Clang compilers.
 https://github.com/JaredP94/TravisCI-Test2
 
+Working commit with Travis using doctest!
+https://github.com/Kyle-11/TestTravis2/commits/factorialDoctest
+
 __Test case (student project submission 2017)__,:
 Travis and Coveralls are enabled for this repo
 https://github.com/witseie-elen4010-2017/Test-CPP-automated-builds
