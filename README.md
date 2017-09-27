@@ -5,6 +5,8 @@ Let's use this repo to collect any resources for doing this. Put all build scrip
 
 ## Useful links
 
+### Travis
+
 Travis C++ Tutorial  
 https://github.com/richelbilderbeek/travis_cpp_tutorial
 
@@ -17,10 +19,24 @@ https://docs.travis-ci.com/user/languages/cpp/
 Teach C++ using GitHub classroom and Travis CI  
 https://www.youtube.com/watch?v=qimc_OGD75E
 
+C++14 on Travis CI with CMake  
+https://jonasw.de/blog/2015/07/22/develop/cplusplus14-on-travis-with-cmake/
+
+### CodeLite
+
 Custom Makefiles in CodeLite  
 http://codelite.org/LiteEditor/CustomMakefiles
 
+Creating a CMake-based project  
+http://codelite.org/LiteEditor/TheCMakePlugin
+
+### Code coverage
+
+Coverage testing with gcov  
+http://www.network-theory.co.uk/docs/gccintro/gccintro_81.html
+
 ---
+## Our stuff
 
 A very brief example of how to get a C++11 program compiled on TravisCI  
 https://github.com/JaredP94/TravisCI-Test
