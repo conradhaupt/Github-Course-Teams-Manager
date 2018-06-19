@@ -35,7 +35,7 @@ http://codelite.org/LiteEditor/TheCMakePlugin
 Coverage testing with gcov  
 http://www.network-theory.co.uk/docs/gccintro/gccintro_81.html
 
-Example project on GitHub using Travis and Coveralls
+Example project on GitHub using Travis and Coveralls  
 https://github.com/libSDL2pp/libSDL2pp
 
 ---
