@@ -1,59 +1,62 @@
-# CPP-automated-builds
-Collects information for automating C++ builds and running unit tests using Travis
+# sd2-github-automation
 
-Let's use this repo to collect any resources for doing this. Put all build scripts, make files etc. in the `build-scripts` folder. Other documentation can go in this readme.
+Helps manage repos for the Software Development 2 course.
 
-## Useful links
+## Setup and usage
 
-### Travis
+It is suggested to use sd2 in a virtual environement (virtualenv). To set that up execute the following:
 
-Travis C++ Tutorial  
-https://github.com/richelbilderbeek/travis_cpp_tutorial
+```bash
+virtualenv ./venv             # Create virtualenv folder
+source ./venv/bin/activate    # Enter the virtualenv
+pip install -r requirements   # Install all dependencies
+```
 
-Continuous integration with Travis CI  
-https://arne-mertz.de/2017/04/continuous-integration-travis-ci/
+Acquire the database files from the gist project. You need the following files:
 
-Travis CI environment for C++ Projects  
-https://docs.travis-ci.com/user/languages/cpp/
+- stored_students.csv
+- stored_teams.csv
 
-Teach C++ using GitHub classroom and Travis CI  
-https://www.youtube.com/watch?v=qimc_OGD75E
+These files should be put in the same folder as ```sd2.py```.
 
-C++14 on Travis CI with CMake  
-https://jonasw.de/blog/2015/07/22/develop/cplusplus14-on-travis-with-cmake/
+### Usage
 
-### CodeLite
+### Create repos
 
-Custom Makefiles in CodeLite  
-http://codelite.org/LiteEditor/CustomMakefiles
+```bash
+./sd2.py repo new --help
+usage: sd2.py repo new [-h] [-n NUMBER] [-N NAME] [-t num [num ...]]
+                       [-T num [num ...]] [-d]
 
-Creating a CMake-based project  
-http://codelite.org/LiteEditor/TheCMakePlugin
+optional arguments:
+  -h, --help            show this help message and exit
+  -n NUMBER, --number NUMBER
+                        The number for the lab repo to create
+  -N NAME, --name NAME  The name of the repo to create
+  -t num [num ...], --team-num num [num ...]
+                        Create a repo for specific teams identified by the
+                        team number
+  -T num [num ...], --team-num-negate num [num ...]
+                        Do not create repos for teams identified by the
+                        following team numbers
+```
 
-### Code coverage
+#### Numbered repos (labs)
 
-Coverage testing with gcov  
-http://www.network-theory.co.uk/docs/gccintro/gccintro_81.html
+```bash
+./sd2.py repo new -n 5
+```
 
-Example project on GitHub using Travis and Coveralls  
-https://github.com/libSDL2pp/libSDL2pp
+The command shown above creates a repo numbered as lab 5.
 
----
-## Our stuff
+#### Named repos (projects etc.)
 
-A very brief example of how to get a C++11 program compiled on TravisCI  
-https://github.com/JaredP94/TravisCI-Test
+```bash
+./sd2.py repo new -N project
+```
 
-Simple Travis example for C++14 using modern GCC and Clang compilers  
-https://github.com/JaredP94/TravisCI-Test2
+The command shown above creates a repo named as "project".
 
-Working commit with Travis using doctest!  
-https://github.com/Kyle-11/TestTravis2/commits/factorialDoctest
+## Dependencies
 
-__Test case (student project submission 2017)__:   
-Travis and Coveralls are enabled for this repo:  
-https://github.com/witseie-elen4010-2017/Test-CPP-automated-builds
-
-## Requirements that projects must conform with
-
-?
+All Python dependencies are listed in ```requirements.txt```.
