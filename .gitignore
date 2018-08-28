@@ -141,3 +141,7 @@ pip-selfcheck.json
 
 ### database files ###
 build-scripts/stored_*.csv
+
+
+### Ignore the Github authentication file ###
+AUTH.py
