@@ -19,6 +19,12 @@ Acquire the database files from the gist project. You need the following files:
 
 These files should be put in the same folder as ```sd2.py```.
 
+### Authentication
+
+```AUTH.py``` should contain a Github Authentication Token registered to your account. You can generate one by navigating on Github.com to the following: ```Settings > Developer Settings > Personal Access Tokens > Generate new token```.
+
+A template for ```AUTH.py``` is given in ```AUTH.py.default```. Insert your token inbetween the single-quotes in ```AUTH.py``` when using ```AUTH.py.default```.
+
 ### Usage
 
 ### Create repos
