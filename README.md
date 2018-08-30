@@ -9,7 +9,7 @@ It is suggested to use sd2 in a virtual environement (virtualenv). To set that u
 ```bash
 virtualenv ./venv             # Create virtualenv folder
 source ./venv/bin/activate    # Enter the virtualenv
-pip install -r requirements   # Install all dependencies
+python -m pip install -r requirements.txt   # Install all dependencies
 ```
 
 Acquire the database files from the gist project. You need the following files:
