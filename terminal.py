@@ -1,7 +1,6 @@
 from colorama import init, Fore, Back, Style
 from math import ceil, log10
 from sys import exit
-import inquirer as inq
 from typing import List
 from classroom import Student, Team
 
@@ -70,20 +69,21 @@ def errorHeading(head, paddingTop=False):
 
 
 def option(listList, msg_prompt, paddingTop=True, paddingBottom=False, paddingInner=False):
-  if paddingTop:
-    print('')
-  results = inq.prompt([inq.Checkbox('results', message=msg_prompt, choices=[
-                       (x, str(i)) for i, x in enumerate(listList)])])
-  if paddingInner:
-    print('')
-  if paddingBottom:
-    print('\n')
-  choices = [int(x) for x in results['results']]
-  for choice in choices:
-    if choice < 0 or choice > len(listList):
-      error(Fore.RED + emphasise(choice) + " is not a valid choice")
-      raise IndexError()
-  return choices
+  raise NotImplementedError('Terminal\'s option() requires a cross-platform alternative to python-inquirer')
+  # if paddingTop:
+  #   print('')
+  # results = inq.prompt([inq.Checkbox('results', message=msg_prompt, choices=[
+  #                      (x, str(i)) for i, x in enumerate(listList)])])
+  # if paddingInner:
+  #   print('')
+  # if paddingBottom:
+  #   print('\n')
+  # choices = [int(x) for x in results['results']]
+  # for choice in choices:
+  #   if choice < 0 or choice > len(listList):
+  #     error(Fore.RED + emphasise(choice) + " is not a valid choice")
+  #     raise IndexError()
+  # return choices
 
 
 def listItems(listList, paddingTop=False, paddingBottom=True):
