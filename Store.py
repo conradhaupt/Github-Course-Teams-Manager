@@ -677,7 +677,8 @@ def create_repo_for_team(team, repo_name, private=True):
   # Attempt to add team to repo
   # for i in range(0,5):
   try:
-    gi_team.add_to_repos(repo)
+    #The functionality of add_to_repos may be covered by set_repo_permission
+    #gi_team.add_to_repos(repo)
     gi_team.set_repo_permission(repo, 'push')
 
       # # Check if the team was added to the repo
