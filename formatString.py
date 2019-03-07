@@ -95,7 +95,7 @@ def format(template, lab_num=None, team=None, students=None, student=None, repo_
         raise ValueError(
             'student is required in the formatting string but student==None')
     # General values
-    res = res.replace(YEAR, '2018')
+    res = res.replace(YEAR, '2019')
     if repo_name is not None:
       res = res.replace(REPO_NAME, repo_name)
     else:
