@@ -188,7 +188,7 @@ __loading_max = 100
 __loading_length = None
 
 
-def loading(msg=None, current=0, max=100, length=20):
+def loading(msg=None, current=0, max=None, length=20):
   global __loading, __loading_max, __msg,__loading_length
   # Calculate caching variables
   if not __loading:
@@ -196,7 +196,10 @@ def loading(msg=None, current=0, max=100, length=20):
     __loading_length = length
   if __loading_length is None:
     __loading_length = length
-  if __loading_max is None:
+  if max is None:
+    if __loading_max is None:
+      __loading_max = 100
+  else:
     __loading_max = max
   __loading = True
   if msg != None:

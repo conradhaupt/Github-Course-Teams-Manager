@@ -228,7 +228,7 @@ def setupArguments(
       '--student',
       type=str,
       nargs=3,
-      metavar=('student_number', 'username', 'surname'),
+      metavar=('student_number', 'username', 'fullname'),
       help='Team member/student details',
       required=True,
       action='append'

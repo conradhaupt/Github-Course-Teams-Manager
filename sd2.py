@@ -25,7 +25,7 @@ def add_teams(args):
   term.heading('Adding new teams from new students file')
   term.status('Loading file...')
   teams = Store.load_students_from_google_form_file(
-      Config.student_csv_filename)
+      Config.student_csv_filename,ignore_first_n_col=2)
   term.loading(msg='Processing teams', current=0, max=3, length=20)
   teams, conflicting_teams, conflicting_students, need_to_register_teams, need_to_register_students, already_existing_teams, already_existing_students = Store.identify_conflicting_teams(
       teams, compare_to_existing=True)
@@ -323,8 +323,8 @@ def modify_team(
     for student in new_students:
       student_number = student[0]
       username = student[1]
-      surname = student[2]
-      students.append(Student(student_number, username, surname=surname))
+      fullname = student[2]
+      students.append(Student(student_number, username, fullname=fullname))
     add_students_to_team(
         team,
         students,

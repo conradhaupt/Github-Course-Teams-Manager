@@ -12,13 +12,13 @@ class Student:
       super().__init__('Student with student number %s and Github username %s not found' %
                        (studentNumber, githubUsername))
 
-  def __init__(self, student_number, username, surname=None):
+  def __init__(self, student_number, username, fullname=None):
     self.__student_number = None
     self.__username = None
-    self.__surname = None
+    self.__fullname = None
     self.set_student_number(student_number)
     self.set_username(username)
-    self.set_surname(surname)
+    self.set_fullname(fullname)
     self.__exists_on_github = None
 
   def get_student_number(self):
@@ -35,12 +35,12 @@ class Student:
     if username:
       self.__username = username.lstrip().rstrip().lower()
 
-  def get_surname(self):
-    return self.__surname
+  def get_fullname(self):
+    return self.__fullname
 
-  def set_surname(self, surname):
-    if surname:
-      self.__surname = surname.lstrip().rstrip()
+  def set_fullname(self, fullname):
+    if fullname:
+      self.__fullname = fullname.lstrip().rstrip()
 
   def set_exists_on_github(self, exists):
     self.__exists_on_github = exists
@@ -71,7 +71,7 @@ class Student:
       return False
     if self.get_username() != student.get_username():
       return False
-    if self.get_surname() != student.get_surname():
+    if self.get_fullname() != student.get_fullname():
       return False
     return True
 
@@ -79,7 +79,7 @@ class Student:
     return not self.__eq__(student)
 
   def __hash__(self):
-    return hash(str([self.__student_number, self.__username, self.__surname]))
+    return hash(str([self.__student_number, self.__username, self.__fullname]))
 
 
 class Team:
@@ -181,5 +181,5 @@ class Team:
     for student in self.__students:
       _str.append(student.get_student_number())
       _str.append(student.get_username())
-      _str.append(student.get_surname())
+      _str.append(student.get_fullname())
     return hash(str(_str))

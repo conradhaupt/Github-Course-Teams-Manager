@@ -27,7 +27,7 @@ def len_students():
 # Returns a list of teams
 
 
-def load_students_from_google_form_file(filename, ignore_header=True, ignore_first_col=True):
+def load_students_from_google_form_file(filename, ignore_header=True, ignore_first_n_col=0):
   studFile = open(Utils.formatFilePath(filename), 'r')
   studReader = csv.reader(studFile)
   teams = list()
@@ -36,12 +36,11 @@ def load_students_from_google_form_file(filename, ignore_header=True, ignore_fir
     next(studReader, None)
   for row in studReader:
     rowIter = iter(row)
-    if ignore_first_col:
+    for i in range(ignore_first_n_col):
       next(rowIter, None)  # Ignore first column, timestamp from Google Drive
-    student1 = Student(next(rowIter, None), next(rowIter, None))
-    student2 = Student(next(rowIter, None), next(rowIter, None))
     team = Team()
-    team.add_students(student1, student2)
+    for _id, _fullname, _username in zip(rowIter, rowIter, rowIter):
+      team.add_student(Student(_id,_username,fullname=_fullname))
     teams.append(team)
   return teams
 
@@ -78,7 +77,9 @@ def identify_conflicting_teams(teams: List[Team], compare_to_existing=True):
   # Identify if any teams have students that don't exist
   need_to_register_teams = list()
   need_to_register_students = list()
-  for team in teams:
+  if term.isLoading():
+    term.loading(msg="Checking if usernames are registered", current=0, max=len(teams))
+  for i_team, team in enumerate(teams):
     needs_to_register = False
     # For each student in the team
     for student in team.get_students():
@@ -87,6 +88,8 @@ def identify_conflicting_teams(teams: List[Team], compare_to_existing=True):
         need_to_register_students.append((student, 'needs_to_register'))
     if needs_to_register:
       need_to_register_teams.append(team)
+    if term.isLoading():
+      term.loading(msg="Checking if usernames are registered", current=i_team, max=len(teams))
   # Remove teams needing to register users
   teams = [t for t in teams if t not in need_to_register_teams]
   if term.isLoading():
@@ -198,7 +201,7 @@ def retire_team(team=None, team_num=None):
 
 
 __student_storage_headers = ['team_num',
-                             'student_number', 'username', 'surname']
+                             'student_number', 'username', 'fullname']
 __team_storage_headers = ['team_num', 'team_name', 'retired', 'github_id']
 
 # Load the internal student storage file
@@ -272,12 +275,12 @@ def load_team_storage():
       team_num = int(next(rowIter, None))
       student_number = next(rowIter, None)
       username = next(rowIter, None)
-      surname = next(rowIter, None)
+      fullname = next(rowIter, None)
     except:
       raise ValueError('Student storage file is malformed')
 
     # Create temporary student
-    student = Student(student_number, username, surname=surname)
+    student = Student(student_number, username, fullname=fullname)
 
     # If the team doesn't exist yet
     if team_num in team_numbers or team_num in team_retired_numbers:
@@ -326,7 +329,7 @@ def save_students_file(
 ):
   studFile = open(Utils.formatFilePath(studentFilename), 'w', newline='')
   studWriter = csv.writer(studFile)
-  studentHeaders = ['student_number', 'username', 'surname']
+  studentHeaders = ['student_number', 'username', 'fullname']
   if reasons is not None:
     studentHeaders += ['reasons']
   studWriter.writerow(studentHeaders)
@@ -336,7 +339,7 @@ def save_students_file(
     studRow = [
         student.get_student_number(),
         student.get_username(),
-        student.get_surname()
+        student.get_fullname()
     ]
     if reasons is not None:
       studRow += [reasons[iStudent]]
@@ -443,7 +446,7 @@ def save_team_storage(
             iTeam if generate_team_numbers else team_num,
             student.get_student_number(),
             student.get_username(),
-            student.get_surname()
+            student.get_fullname()
         ]
         if extra_student_args != None:
           studentRow += extra_student_args[iTeam][iStudent]
@@ -704,11 +707,11 @@ def load_students_add_teams_from_file(filename):
     team_id = next(rowIter, None)
     student_number = next(rowIter, None)
     username = next(rowIter, None)
-    surname = next(rowIter, None)
+    fullname = next(rowIter, None)
     student = Student(
         student_number,
         username,
-        surname=surname
+        fullname=fullname
     )
     if team_id in team_identifiers:
       team = Team(team_id)
