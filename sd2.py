@@ -63,7 +63,7 @@ def add_teams(args):
     term.listTeams(teams)
   else:
     term.warning('There are no available teams to add, exiting')
-    exit()
+    sys.exit()
 
   # Write to file if requested
   if Config.error_teams_filename and not Utils.fileExists(Config.error_teams_filename):
@@ -96,7 +96,7 @@ def add_teams(args):
 
   if not term.confirm('Would you like to add the above teams to the db? [y/n] (default=y) > '):
     term.status('Exiting')
-    exit()
+    sys.exit()
 
   term.loading_indeterminate('Adding teams to Github')
   Store.add_teams(teams)
@@ -154,11 +154,11 @@ def sync_db_teams(args, dry_run, team_nums, team_num_negate, check_membership):
     if not term.confirm('Would you like to add the above teams to Github? [y/n] (default=y) > '):
       term.status('Exiting')
       if not check_membership:
-        exit()
+        sys.exit()
   else:
     term.warning('No teams must be created on Github')
     if not check_membership:
-      exit()
+      sys.exit()
   if teams_to_add:
     term.heading('Creating teams on Github')
     failed_teams, num_teams_created = Store.create_teams_on_github(
@@ -224,7 +224,7 @@ def add_repo(args, lab_num, team_nums, team_num_negate=None, dry_run=False, repo
   # Repo details
   if lab_num is not None and repo_type_name is not None:
     term.error('Cannot create a lab repo with repo_name')
-    exit()
+    sys.exit()
   is_lab = True if lab_num is not None and repo_type_name is None else False
 
   # List teams and confirm details
@@ -243,7 +243,7 @@ def add_repo(args, lab_num, team_nums, team_num_negate=None, dry_run=False, repo
 
   if not term.confirm('Would you like to create the repo for above teams? [y/n] (default=y) > '):
     term.status('Exiting')
-    exit()
+    sys.exit()
 
   # Create each team's repo
   failed_repo_teams = []
@@ -315,7 +315,7 @@ def modify_team(
   team = Store.get_team(team_num=team_num)
   if team is None:
     term.error('Team with number %03d does not exist' % (team_num))
-    exit()
+    sys.exit()
 
   ## Add new students ##
   if action is ArgsModTeamAction.STUDENT_ADD:
@@ -342,7 +342,7 @@ def retire_team(args, team_num):
   if team is None:
     term.error(
         'Team with team number %d doesn\'t exist in the database' % (team_num))
-    exit()
+    sys.exit()
   success, reason = Store.retire_team(team)
   if success:
     term.status('Team retired successfully')

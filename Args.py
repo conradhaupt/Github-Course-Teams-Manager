@@ -4,6 +4,7 @@ import terminal as term
 import os
 import Utils
 from enum import Enum
+import sys
 
 __func_teams_add_from_file = None
 __func_team_add = None
@@ -40,7 +41,7 @@ def __parse_teams_add_from_file(args):
     else:
       term.error('Found already existing file %s to save valid teams to, please delete it to run the program' %
                  (args.save_teams_file))
-      exit()
+      sys.exit()
   if args.error_teams_file:
     if not os.path.exists(Utils.formatFilePath(args.error_teams_file)):
       Config.error_teams_filename = Utils.formatFilePath(
@@ -48,7 +49,7 @@ def __parse_teams_add_from_file(args):
     else:
       term.error('Found already existing file %s to save teams with errors to, please delete it to run the program' %
                  (args.error_teams_file))
-      exit()
+      sys.exit()
   if args.error_students_file:
     if not os.path.exists(Utils.formatFilePath(args.error_students_file)):
       Config.error_students_filename = Utils.formatFilePath(
@@ -56,7 +57,7 @@ def __parse_teams_add_from_file(args):
     else:
       term.error('Found already existing file %s to save students with errors to, please delete it to run the program' %
                  (args.error_students_file))
-      exit()
+      sys.exit()
   if callable(__func_teams_add_from_file):
     __func_teams_add_from_file(args)
 
