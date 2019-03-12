@@ -457,7 +457,7 @@ def setupArguments(
   sync_teams_parser.add_argument(
       '-m',
       '--membership',
-      help='Check student membership',
+      help='Update student membership for existing teams (use when modifying teams)',
       action='store_true'
   )
   sync_parser.set_defaults(func=__parse_sync_teams)
