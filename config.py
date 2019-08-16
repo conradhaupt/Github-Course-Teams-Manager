@@ -1,7 +1,7 @@
 import Utils
 import formatString as fstr
 
-org_name = 'witseie-elen4010'
+org_name = 'witseie-elen3009'
 repo_name_template = \
     fstr.YEAR\
     + '-'\

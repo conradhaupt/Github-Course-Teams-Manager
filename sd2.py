@@ -25,7 +25,8 @@ def add_teams(args):
   term.heading('Adding new teams from new students file')
   term.status('Loading file...')
   teams = Store.load_students_from_google_form_file(
-      Config.student_csv_filename,ignore_first_n_col=2)
+      Config.student_csv_filename, ignore_first_n_col=1)
+  print('Num teams is %d' % (len(teams)))
   term.loading(msg='Processing teams', current=0, max=3, length=20)
   teams, conflicting_teams, conflicting_students, need_to_register_teams, need_to_register_students, already_existing_teams, already_existing_students = Store.identify_conflicting_teams(
       teams, compare_to_existing=True)
@@ -102,6 +103,14 @@ def add_teams(args):
   Store.add_teams(teams)
   term.endloading('Added teams to Github')
 
+def add_team(args, student_details, team_name=None, team_num=None):
+  team = Team(team_num=team_num, team_name=team_name)
+  for s in student_details:
+    stud = Student(s[0], s[1], s[2])
+    team.add_student(stud)
+
+  term.heading('Team to add')
+  term.listTeams([team])
 
 def list_students(args, githubSync, sort, retired=False):
   students = Store.get_students(include_retired=retired, exclude_valid=retired)
@@ -361,7 +370,8 @@ if __name__ == '__main__':
       funcSyncTeams=sync_db_teams,
       funcRepoAdd=add_repo,
       funcModifyTeam=modify_team,
-      funcRetireTeam=retire_team
+      funcRetireTeam=retire_team,
+      funcTeamAdd=add_team
   )
   Args.processArguments()
   team_count, student_count, retired_team_count, retired_students_count = Store.save_team_storage(

@@ -34,12 +34,14 @@ def load_students_from_google_form_file(filename, ignore_header=True, ignore_fir
   # Ignore header line
   if ignore_header:
     next(studReader, None)
+  test = True
   for row in studReader:
+
     rowIter = iter(row)
     for i in range(ignore_first_n_col):
       next(rowIter, None)  # Ignore first column, timestamp from Google Drive
     team = Team()
-    for _id, _fullname, _username in zip(rowIter, rowIter, rowIter):
+    for _id, _username, _fullname in zip(rowIter, rowIter, rowIter):
       team.add_student(Student(_id,_username,fullname=_fullname))
     teams.append(team)
   return teams
@@ -68,6 +70,7 @@ def identify_conflicting_teams(teams: List[Team], compare_to_existing=True):
           conflicting_students.add(student)
   # Remove conflicting teams
   for duplicate_team in duplicate_teams:
+    print('Removing duplicate team %s' % (str(duplicate_team)))
     teams.remove(duplicate_team)
   teams = [t for t in teams if t not in conflicting_teams]
   if term.isLoading():
@@ -585,6 +588,7 @@ def create_teams_on_github(team_names, is_secret=True, dry_run=False):
         team.set_github_id(gi_team.id)
 
       num_teams_created += 1
+      nTeams_processed += 1
     except:
       term.error()
       teams_that_failed.append(team)
@@ -630,7 +634,8 @@ def update_team_membership(teams=None, dry_run=False, team_numbers=None):
         gi_team_member_logins.add(str(m.login).lower())
     student_names_added = list()
     # For all students in the team
-    for student in team.get_students():
+    NStudentsInTeam = len(team.get_students())
+    for iStudent, student in enumerate(team.get_students()):
       # Check if the student is already in the team on Github
       if (
           str(student.get_username()).lower() in gi_team_member_logins or
@@ -642,7 +647,7 @@ def update_team_membership(teams=None, dry_run=False, team_numbers=None):
       else:
         student_is_member = False
       if not student_is_member:
-        term.loading(msg='Add student (%s,%s)' % (
+        term.loading(current=iStudent,max=NStudentsInTeam,msg='Add student (%s,%s)' % (
             student.get_student_number(),
             student.get_username()
         ))

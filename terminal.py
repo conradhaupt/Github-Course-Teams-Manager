@@ -4,7 +4,7 @@ from sys import exit
 from typing import List
 from classroom import Student, Team
 
-init(autoreset=True,convert=True)
+init(autoreset=True)
 
 def emphasise(text):
   if type(text) != str.__class__:

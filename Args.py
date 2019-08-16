@@ -67,8 +67,18 @@ def __parse_team_add(args):
   student_details = []
   for s in args.student:
     student_details.append((s[0], s[1], s[2]))
+
+  # Check if there's a custom team name
+  team_name = None
+  if args.name:
+      team_name = args.name
+
+  team_num = None
+  if args.number:
+      team_num = args.number
+
   if callable(__func_team_add):
-    __func_team_add(args, student_details)
+    __func_team_add(args, student_details, team_name = team_name, team_num = team_num)
 
 
 def __parse_list_students(args):
@@ -210,6 +220,7 @@ def setupArguments(
   global __func_list_teams
   global __func_sync_teams
   global __func_repo_add
+  global __func_team_add
   __func_teams_add_from_file = funcTeamsAddFromFile
   __func_team_add = funcTeamAdd
   __func_retire_team = funcRetireTeam
@@ -300,6 +311,12 @@ def setupArguments(
       '--number',
       help='The team number to use',
       type=int
+  )
+  addTeam_Parser.add_argument(
+      '-N',
+      '--name',
+      help='Custom team name to use',
+      type=str
   )
   addTeam_Parser.add_argument(
       '-r',
