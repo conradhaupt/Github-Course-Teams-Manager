@@ -26,7 +26,7 @@ def len_students():
 
 # Returns a list of teams
 
-
+# not used when directly creating csv files
 def load_students_from_google_form_file(filename, ignore_header=True, ignore_first_n_col=0):
   studFile = open(Utils.formatFilePath(filename), 'r')
   studReader = csv.reader(studFile)
