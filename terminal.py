@@ -98,7 +98,7 @@ def listItems(listList, paddingTop=False, paddingBottom=True):
 def listStudents(listStudents: List[Student], reasons=None, highlightExistence=True, paddingTop=False, paddingBottom=True):
   if paddingTop:
     print('')
-  printFormat_DoesntExist = ' - %s (' + Fore.RED + '%s' + Fore.RESET + ')'
+  printFormat_DoesntExist = ' - %s (' + Fore.RED + '%s [DOES NOT EXIST]' + Fore.RESET + ')'
   printFormat_Exists = ' - %s (' + Fore.GREEN + '%s' + Fore.RESET + ')'
   printFormat = ' - %s (%s)'
   for iStudent, student in enumerate(listStudents):
