@@ -23,6 +23,10 @@ def processArguments():
   if not __parser:
     raise RuntimeError('Please run setupArguments() before processArguments()')
   args = __parser.parse_args()
+  # Handle zero arguments
+  if len(sys.argv) == 1:
+      __parser.print_help(sys.stderr)
+      exit(1)
   args.func(args)
 
 
