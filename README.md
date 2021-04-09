@@ -1,10 +1,10 @@
-# sd2-github-automation
+# Github Course Teams Manager
 
-Helps manage repos for the Software Development 2 course.
+Helps manage repos and teams for university courses on GitHub.
 
 ## Setup and usage
 
-It is suggested to use sd2 in a virtual environement (virtualenv). To set that up execute the following:
+It is suggested to use GCTM in a virtual environment (virtualenv). To set that up, execute the following:
 
 ```bash
 virtualenv ./venv             # Create virtualenv folder
@@ -17,21 +17,21 @@ Acquire the database files from the gist project. You need the following files:
 - stored_students.csv
 - stored_teams.csv
 
-These files should be put in the same folder as ```sd2.py```.
+These files should be put in the same folder as `gctm.py`.
 
 ### Authentication
 
-```AUTH.py``` should contain a Github Authentication Token registered to your account. You can generate one by navigating on Github.com to the following: ```Settings > Developer Settings > Personal Access Tokens > Generate new token```.
+`AUTH.py` should contain a GitHub Authentication Token registered to your account. You can generate one by navigating on [github.com](https://github.com) to the following: `Settings > Developer Settings > Personal Access Tokens > Generate new token`.
 
-A template for ```AUTH.py``` is given in ```AUTH.py.default```. Insert your token inbetween the single-quotes in ```AUTH.py``` when using ```AUTH.py.default```.
+A template for `AUTH.py` is given in `AUTH.py.default`. Insert your token in between the single-quotes in `AUTH.py` when using `AUTH.py.default`.
 
 ### Usage
 
 ### Create repos
 
 ```bash
-./sd2.py repo new --help
-usage: sd2.py repo new [-h] [-n NUMBER] [-N NAME] [-t num [num ...]]
+./gctm.py repo new --help
+usage: gctm.py repo new [-h] [-n NUMBER] [-N NAME] [-t num [num ...]]
                        [-T num [num ...]] [-d]
 
 optional arguments:
@@ -50,7 +50,7 @@ optional arguments:
 #### Numbered repos (labs)
 
 ```bash
-./sd2.py repo new -n 5
+./gctm.py repo new -n 5
 ```
 
 The command shown above creates a repo numbered as lab 5.
@@ -58,11 +58,11 @@ The command shown above creates a repo numbered as lab 5.
 #### Named repos (projects etc.)
 
 ```bash
-./sd2.py repo new -N project
+./gctm.py repo new -N project
 ```
 
 The command shown above creates a repo named as "project".
 
 ## Dependencies
 
-All Python dependencies are listed in ```requirements.txt```.
+All Python dependencies are listed in `requirements.txt`.
