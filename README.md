@@ -31,8 +31,10 @@ A template for `AUTH.py` is given in `AUTH.py.default`. Insert your token in bet
 
 ```bash
 ./gctm.py repo new --help
-usage: gctm.py repo new [-h] [-n NUMBER] [-N NAME] [-t num [num ...]]
-                       [-T num [num ...]] [-d]
+```
+
+```txt
+usage: gctm.py repo new [-h] [-n NUMBER] [-N NAME] [-t num [num ...]] [-T num [num ...]] [-d]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -40,11 +42,10 @@ optional arguments:
                         The number for the lab repo to create
   -N NAME, --name NAME  The name of the repo to create
   -t num [num ...], --team-num num [num ...]
-                        Create a repo for specific teams identified by the
-                        team number
+                        Create a repo for specific teams identified by the team number
   -T num [num ...], --team-num-negate num [num ...]
-                        Do not create repos for teams identified by the
-                        following team numbers
+                        Do not create repos for teams identified by the following team numbers
+  -d, --dry-run         Verify with Github but don't modify anything on Github
 ```
 
 #### Numbered repos (labs)
