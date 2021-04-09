@@ -9,8 +9,8 @@ repo_name_template = \
     + fstr.LAB_NUM \
     + fstr.repeat_for_students('-' + fstr.STUD_STUD_NUM +
                                '-' + fstr.STUD_FULLNAME)
-repo_name_lab = "lab"
-repo_name_project = "project"
+repo_name_lab = "Lab"
+repo_name_project = "Project"
 student_csv_filename = 'registeredStudents.csv'
 error_teams_filename = None
 error_students_filename = None
